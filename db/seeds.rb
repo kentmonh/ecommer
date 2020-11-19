@@ -21,12 +21,18 @@ perfumes.each do |perfume|
   next unless brand&.valid?
 
   price = Faker::Commerce.price(range: 30..100.0)
+  random_int = rand(8)
+  sale_price = if random_int == 0
+                 Faker::Commerce.price(range: price - 10..price - 2)
+               else
+                 price
+               end
 
   p = brand.products.create(
     sku:         Faker::Barcode.unique.upc_a,
     name:        perfume["Name"],
     price:       price,
-    sale_price:  Faker::Commerce.price(range: price - 10..price - 2),
+    sale_price:  sale_price,
     stock:       Faker::Number.within(range: 5..500),
     description: Faker::Marketing.buzzwords
   )
@@ -53,4 +59,6 @@ puts "Created #{Product.count} products"
 puts "Created #{Category.count} categories"
 puts "Created #{ProductCategory.count} product categories"
 
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+if Rails.env.development?
+  AdminUser.create!(email: "admin@example.com", password: "password", password_confirmation: "password")
+end
