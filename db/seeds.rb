@@ -2,6 +2,8 @@ require "csv"
 require "faker"
 
 # Clearing our data
+ProductCategory.delete_all
+Category.delete_all
 Product.delete_all
 Brand.delete_all
 
@@ -15,6 +17,8 @@ perfumes = CSV.parse(csv_data, headers: true, encoding: "utf-8")
 perfumes.each do |perfume|
   brand = Brand.find_or_create_by(name: perfume["Brand"])
 
+  next unless brand&.valid?
+
   price = Faker::Commerce.price(range: 30..100.0)
 
   p = brand.products.create(
@@ -25,7 +29,25 @@ perfumes.each do |perfume|
     stock:       Faker::Number.within(range: 5..500),
     description: Faker::Marketing.buzzwords
   )
+
+  next unless p&.valid?
+
+  categories = perfume["Gender"].split(", ").map(&:strip)
+
+  # Randomly add more in categories
+  addition_category_weather = ["Summer", "Winter", "All Year"].sample
+  addition_category_rare = ["Rare Gem", "", "", "", ""].sample
+
+  categories << addition_category_weather
+  categories << addition_category_rare if addition_category_rare == "Rare Gem"
+
+  categories.each do |category_name|
+    category = Category.find_or_create_by(name: category_name)
+    ProductCategory.create(product: p, category: category)
+  end
 end
 
 puts "Created #{Brand.count} brands"
 puts "Created #{Product.count} products"
+puts "Created #{Category.count} categories"
+puts "Created #{ProductCategory.count} product categories"
