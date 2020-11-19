@@ -15,16 +15,16 @@ perfumes = CSV.parse(csv_data, headers: true, encoding: "utf-8")
 perfumes.each do |perfume|
   brand = Brand.find_or_create_by(name: perfume["Brand"])
 
+  price = Faker::Commerce.price(range: 30..100.0)
+
   p = brand.products.create(
     sku:         Faker::Barcode.unique.upc_a,
     name:        perfume["Name"],
-    price:       Faker::Commerce.price(range: 30..100.0),
-    sale_price:  Faker::Commerce.price(range: 30..100.0),
+    price:       price,
+    sale_price:  Faker::Commerce.price(range: price - 10..price - 2),
     stock:       Faker::Number.within(range: 5..500),
     description: Faker::Marketing.buzzwords
   )
-
-  puts "Invalid perfume #{perfume['Name']}" unless p&.valid?
 end
 
 puts "Created #{Brand.count} brands"
