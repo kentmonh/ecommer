@@ -6,6 +6,7 @@ ProductCategory.delete_all
 Category.delete_all
 Product.delete_all
 Brand.delete_all
+AdminUser.delete_all
 
 # Loop through the rows of a CSV file
 csv_file = Rails.root.join("db/perfume.csv")
@@ -51,3 +52,5 @@ puts "Created #{Brand.count} brands"
 puts "Created #{Product.count} products"
 puts "Created #{Category.count} categories"
 puts "Created #{ProductCategory.count} product categories"
+
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
