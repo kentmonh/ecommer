@@ -13,6 +13,21 @@
   </head>
 
   <body>
+    <!-- nav section -->
+    <nav class="navbar navbar-expand-sm justify-content-center">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <p class="nav-link lead"><%= link_to "Homepage", root_path %></p>
+        </li>
+        <li class="nav-item">
+          <p class="nav-link lead"><%= link_to "About Us", permalink_path("about") %></p>
+        </li>
+        <li class="nav-item">
+          <p class="nav-link lead"><%= link_to "Mens", men_products_url %></p>
+        </li>
+      </ul>
+    </nav>
+
     <%= yield %>
   </body>
 </html>

@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
+  # Routes for products
   resources :products, only: %i[index show]
+  get "men_products", to: "products#men_products", as: "men_products"
 
   # Routes for Pages
   get ":permalink", to: "pages#permalink", as: :permalink
@@ -9,5 +11,4 @@ Rails.application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
