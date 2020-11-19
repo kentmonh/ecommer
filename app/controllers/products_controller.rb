@@ -2,6 +2,6 @@ class ProductsController < ApplicationController
   def index
   end
 
-  def show
+  def view
   end
 end
