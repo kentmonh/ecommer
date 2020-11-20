@@ -20,23 +20,43 @@
   <body>
     <!-- nav section -->
     <nav class="navbar navbar-expand-sm">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <p class="nav-link lead"><%= link_to "Homepage", root_path %></p>
-        </li>
-        <li class="nav-item">
-          <p class="nav-link lead"><%= link_to "About Us", permalink_path("about") %></p>
-        </li>
-        <li class="nav-item">
-          <p class="nav-link lead"><%= link_to "Contact Us", permalink_path("contact") %></p>
-        </li>
-        <li class="nav-item">
-          <p class="nav-link lead"><%= link_to "Mens", men_products_url %></p>
-        </li>
-        <li class="nav-item">
-          <p class="nav-link lead"><%= link_to "Womens", women_products_url %></p>
-        </li>
-      </ul>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <p class="nav-link lead"><%= link_to "Homepage", root_path %></p>
+          </li>
+          <li class="nav-item">
+            <p class="nav-link lead"><%= link_to "About Us", permalink_path("about") %></p>
+          </li>
+          <li class="nav-item">
+            <p class="nav-link lead"><%= link_to "Contact Us", permalink_path("contact") %></p>
+          </li>
+          <li class="nav-item">
+            <p class="nav-link lead"><%= link_to "Mens", men_products_url %></p>
+          </li>
+          <li class="nav-item">
+            <p class="nav-link lead"><%= link_to "Womens", women_products_url %></p>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav">
+          <% if customer_signed_in? %>
+            <li class="nav-item">
+              <p class="nav-link lead"><%= current_customer.email %></p>
+            </li>
+            <li class="nav-item">
+              <p class="nav-link lead"><%= link_to "Sign Out",destroy_customer_session_path, :method => :delete %></p>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <p class="nav-link lead"><%= link_to "Sign Up",new_customer_registration_path %></p>
+            </li>
+            <li class="nav-item">
+              <p class="nav-link lead"><%= link_to "Sign In",customer_session_path, :method => :post %></p>
+            </li>
+          <% end %>
+        </ul>
+      </div>
     </nav>
 
     <%= yield %>

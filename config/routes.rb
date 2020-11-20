@@ -2,6 +2,12 @@ Rails.application.routes.draw do
   # Routes for customers devise
   devise_for :customers
 
+  as :customer do
+    get "signup", to: "devise/registrations#new", as: "signup"
+    post "signin" => "devise/sessions#create", as: "signin"
+    delete "signout" => "devise/sessions#destroy", as: "signout"
+  end
+
   # Routes for products
   resources :products, only: %i[index show] do
     collection do
@@ -21,6 +27,7 @@ Rails.application.routes.draw do
   # Homepage
   root to: "products#index"
 
+  # Active Admin
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 end

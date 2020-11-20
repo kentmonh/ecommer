@@ -1,3 +1,7 @@
 <p class="lead">
-  <%= simple_format(@page.content) %>
+  <% if @page != nil %>
+    <%= simple_format(@page.content) %>
+  <% else %>
+    <%= controller.redirect_to root_path %>
+  <% end %>
 </p>
