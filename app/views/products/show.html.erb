@@ -11,8 +11,28 @@
     <p class="lead">
       <%= @product.name %>
     </p>
+
     <p>
       <%= link_to "By #{@product.brand.name}", @product.brand %>
     </p>
+
+    <p>
+      Sku: <%= @product.sku %>
+    </p>
+
+    <% if @product.sale_price.present? && @product.sale_price < @product.price %>
+      <p>
+        Price On Sale: <s><%= @product.price %></s> <%= @product.sale_price %>
+      </p>
+    <% else %>
+      <p>
+        Price: <%= @product.price %>
+      </p>
+    <% end %>
+
+    <p>
+      Product Information: <%= simple_format(@product.description) %>
+    </p>
+
   </div>
 </div>
