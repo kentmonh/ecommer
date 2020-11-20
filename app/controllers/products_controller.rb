@@ -7,5 +7,11 @@ class ProductsController < ApplicationController
     @men_products = Product.joins(:categories).where(categories: { name: "Men" })
   end
 
-  def view; end
+  def women_products
+    @women_products = Product.joins(:categories).where(categories: { name: "Women" })
+  end
+
+  def show
+    @product = Product.find(params[:id])
+  end
 end
