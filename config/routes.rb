@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  # Routes for customers devise
+  devise_for :customers
+
   # Routes for products
   resources :products, only: %i[index show] do
     collection do
