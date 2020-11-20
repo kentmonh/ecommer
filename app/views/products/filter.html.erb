@@ -1,0 +1,35 @@
+<% @title = @filter_keyword %>
+
+<h2 class="display-4 text-center"> <%= @filter_keyword %> </h2>
+
+<div>
+  <%= form_with(url: filter_products_path, method: :get, local: true) do %>
+    <div class="form-row align-items-center">
+      <div class="col-auto">
+        <label class="form-check-label">
+          Filter Products
+        </label>
+      </div>
+      <div class="col-auto">
+        <% if @filter_keyword == "All Products" %>
+          <%= select_tag 'filter_product', raw("<option selected='selected'>All Products</option>
+            <option>Sale Products</option>
+            <option>New Products</option>"), :onchange => "this.form.submit();" %>
+        <% elsif @filter_keyword == "Sale Products" %>
+          <%= select_tag 'filter_product', raw("<option>All Products</option>
+            <option selected='selected'>Sale Products</option>
+            <option>New Products</option>"), :onchange => "this.form.submit();" %>
+        <% else %>
+          <%= select_tag 'filter_product', raw("<option>All Products</option>
+            <option>Sale Products</option>
+            <option selected='selected'>New Products</option>"), :onchange => "this.form.submit();" %>
+        <% end %>
+
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="card-deck">
+  <%= render @filter_products %>
+</div>
