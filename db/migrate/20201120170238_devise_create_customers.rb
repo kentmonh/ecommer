@@ -35,7 +35,7 @@ class DeviseCreateCustomers < ActiveRecord::Migration[6.0]
       t.string :full_name
       t.text :address
       t.string :phone
-      t.references :province
+      t.references :province, null: false, foreign_key: true
 
       t.timestamps null: false
     end
