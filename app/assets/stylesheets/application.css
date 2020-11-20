@@ -5,6 +5,7 @@ body {
   padding: 3% 10% 3% 10%;
 }
 
+/* Link */
 a {
   color: #000;
 }
@@ -16,4 +17,9 @@ a:hover {
 
 ul {
   list-style-type: none;
+}
+
+/* Pagination */
+.pagination a {
+  color: #000;
 }
