@@ -1,5 +1,18 @@
-<% @title = { @product.name } %>
+<% @title = @product.name %>
 
-<p>
-  <%= @product.name %>
-</p>
+<div class="row">
+  <div class="col-5">
+    <% if @product.image.present? %>
+      <%= image_tag @product.image, class:"img-fluid" %>
+    <% end %>
+  </div>
+
+  <div class="col-6 offset-1">
+    <p class="lead">
+      <%= @product.name %>
+    </p>
+    <p>
+      <%= link_to "By #{@product.brand.name}", @product.brand %>
+    </p>
+  </div>
+</div>
