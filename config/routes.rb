@@ -21,13 +21,13 @@ Rails.application.routes.draw do
   # Routes for brands
   resources :brands, only: %i[index show]
 
-  # Routes for Pages
-  get ":permalink", to: "pages#permalink", as: :permalink
-
   # Homepage
   root to: "products#index"
 
   # Active Admin
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
+
+  # Routes for Pages
+  get ":permalink", to: "pages#permalink", as: :permalink
 end
