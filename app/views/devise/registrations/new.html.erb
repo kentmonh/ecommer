@@ -34,7 +34,7 @@
 
   <div class="form-group">
     <%= f.label :province %>
-    <%= f.select(:province_id, Province.all.collect { |p| [p.name, p.id] }, :prompt => 'Select Province') %>
+    <%= f.collection_select :province_id, Province.all, :id, :name, prompt: true %>
   </div>
 
   <div class="form-group">
