@@ -31,6 +31,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 # Active Admin
 gem 'activeadmin'
 gem 'devise'
+gem 'devise-bootstrap-views', '~> 1.0'
 
 # Gem to using pagination
 gem 'kaminari'
