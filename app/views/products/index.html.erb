@@ -17,6 +17,12 @@
   <% end %>
 </div>
 
+<% if flash[:add_cart] %>
+  <div class="alert alert-success" role="alert">
+    <%= flash[:add_cart] %>
+  </div>
+<% end %>
+
 <div class="card-deck">
   <%= render @products %>
 </div>
