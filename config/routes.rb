@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   # Session Shopping Cart
-  # resources :cart, only: %i[create destroy index show]
+  resources :cart, only: %i[create destroy index]
 
   # Routes for orders
   resources :orders, only: %i[show]

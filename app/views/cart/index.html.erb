@@ -1,0 +1,48 @@
+<div>
+  <h2 class="lead">There are <%= cart.size %> products in the cart.</h2>
+</div>
+
+<% if cart.present? %>
+  <% cart.each do |product| %>
+    <div class="card m-1" style="height: 20rem;">
+      <div class="card-body">
+        <div class="row">
+            <div class="col-md-3">
+              <% if product.image.present? %>
+                <%= image_tag product.image, class: "card-img" %>
+              <% end %>
+            </div>
+            <div class="col-md-7 offset-2">
+
+              <p class="lead">
+                <%= product.name %>
+              </p>
+
+              <p>
+                By <%= product.brand.name %>
+              </p>
+
+              <p>
+                Sku: <%= product.sku %>
+              </p>
+
+              <% if product.sale_price.present? %>
+                <p>
+                  Price: <%= product.sale_price %>
+                </p>
+              <% else %>
+                <p>
+                  Price: <%= product.price %>
+                </p>
+              <% end %>
+
+            </div>
+        </div>
+      </div>
+    </div>
+
+  <% end %>
+<% end %>
+
+
+
