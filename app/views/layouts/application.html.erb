@@ -50,7 +50,7 @@
           <% else %>
             <li class="nav-item">
               <p class="nav-link lead"><%= link_to "Cart", cart_index_path, :method => :get %>
-                <span class="badge badge-secondary"><%= cart.size %></span></p>
+                <span class="badge badge-secondary"><%= cart.length %></span></p>
             </li>
             <li class="nav-item">
               <p class="nav-link lead"><%= link_to "Sign Up", new_customer_registration_path %></p>
@@ -62,6 +62,8 @@
         </ul>
       </div>
     </nav>
+
+    <%= debug session[:cart] %>
 
     <%= yield %>
   </body>

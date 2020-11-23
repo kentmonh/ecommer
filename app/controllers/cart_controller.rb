@@ -2,6 +2,7 @@ class CartController < ApplicationController
   # POST /cart
   def create
     id = params[:id].to_i
+
     unless session[:cart].include?(id)
       session[:cart] << id
       product = Product.find(id)

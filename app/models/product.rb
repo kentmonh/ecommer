@@ -7,7 +7,7 @@ class Product < ApplicationRecord
 
   has_one_attached :image
 
-  validates :sku, :name, presence: true
+  validates :sku, :name, :price, :sale_price, presence: true
   validates :sku, :name, uniqueness: true
   validates :stock, numericality: { only_integer: true }
   validates :price, :sale_price, numericality: true
