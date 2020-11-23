@@ -29,7 +29,10 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   # Session Shopping Cart
-  resources :cart, only: %i[create destroy index show]
+  # resources :cart, only: %i[create destroy index show]
+
+  # Routes for orders
+  resources :orders, only: %i[show]
 
   # Routes for Pages
   get ":permalink", to: "pages#permalink", as: :permalink
