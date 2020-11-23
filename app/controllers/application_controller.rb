@@ -11,4 +11,16 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
     devise_parameter_sanitizer.permit :account_update, keys: added_attrs
   end
+
+  # For session shopping cart
+  before_action :init_session
+  helper_method :cart
+
+  def init_session
+    session[:cart] ||= []
+  end
+
+  def cart
+    Product.find(session[:cart])
+  end
 end

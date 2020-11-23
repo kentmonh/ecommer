@@ -3,13 +3,22 @@
 
     <% if product.image.present? %>
       <%= link_to product do %>
-        <%= image_tag product.image, class:"card-img-top" %>
+        <%= image_tag product.image, class: "card-img-top" %>
       <% end %>
     <% end %>
 
-    <div class="card-body">
+    <div class="card-body ">
       <h5 class="card-title lead"> <%= link_to product.name, product %> </h5>
+
+      <div class="col d-flex justify-content-center">
+        <%= form_with url: cart_index_path, method: :post do %>
+          <%= hidden_field_tag(:id, product.id) %>
+          <%= button_tag "Add to Card", class: "btn btn-outline-dark" %>
+        <% end %>
+      </div>
     </div>
+
+
 
   </div>
 </div>
