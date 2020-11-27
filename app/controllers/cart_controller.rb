@@ -5,6 +5,7 @@ class CartController < ApplicationController
 
     unless session[:cart].include?(id)
       session[:cart] << id
+      session[:quantity] << 1
       product = Product.find(id)
       flash[:add_cart] = "#{product.name} added to the Cart."
       redirect_to root_path

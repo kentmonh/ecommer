@@ -15,18 +15,6 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
-  def search
-    keyword_search = "%#{params[:keywords]}%"
-    brand_search = params[:select_brand]
-    if brand_search == ""
-      @result_products_count = Product.where("name LIKE ?", keyword_search)
-      @result_products = Product.where("name LIKE ?", keyword_search).page(params[:page])
-    else
-      @result_products_count = Product.where("name LIKE ? AND brand_id = ?", keyword_search, brand_search)
-      @result_products = Product.where("name LIKE ? AND brand_id = ?", keyword_search, brand_search).page(params[:page])
-    end
-  end
-
   def filter
     filter = params[:filter_product]
     if filter == "Sale Products"
