@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'carts/show'
   # Routes for customers devise
   devise_for :customers
 
