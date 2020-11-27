@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   # Routes for products
   resources :products, only: %i[index show] do
     collection do
-      get "filter"
+      get "filter", "search"
     end
   end
 
