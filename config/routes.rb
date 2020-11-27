@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'carts/show'
   # Routes for customers devise
   devise_for :customers
 
@@ -22,6 +21,9 @@ Rails.application.routes.draw do
   # Routes for brands
   resources :brands, only: %i[index show]
 
+  # Routes for carts
+  resources :carts, only: %i[show create destroy]
+
   # Homepage
   root to: "products#index"
 
@@ -29,12 +31,12 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
-  # Session Shopping Cart
-  resources :cart, only: %i[create destroy index]
-
   # Routes for orders
   resources :orders, only: %i[show]
 
   # Routes for Pages
   get ":permalink", to: "pages#permalink", as: :permalink
 end
+
+# Session Shopping Cart
+# resources :cart, only: %i[create destroy index]

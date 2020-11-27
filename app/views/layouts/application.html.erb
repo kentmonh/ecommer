@@ -42,16 +42,12 @@
         <ul class="navbar-nav">
           <% if customer_signed_in? %>
             <li class="nav-item">
-              <p class="nav-link lead"><%= current_customer.email %></p>
+              <p class="nav-link lead"><%= link_to current_customer.email, cart_path %></p>
             </li>
             <li class="nav-item">
               <p class="nav-link lead"><%= link_to "Sign Out", destroy_customer_session_path, :method => :delete %></p>
             </li>
           <% else %>
-            <li class="nav-item">
-              <p class="nav-link lead"><%= link_to "Cart", cart_index_path, :method => :get %>
-                <span class="badge badge-secondary"><%= cart.length %></span></p>
-            </li>
             <li class="nav-item">
               <p class="nav-link lead"><%= link_to "Sign Up", new_customer_registration_path %></p>
             </li>
@@ -62,8 +58,6 @@
         </ul>
       </div>
     </nav>
-
-    <%= debug session[:cart] %>
 
     <%= yield %>
   </body>
