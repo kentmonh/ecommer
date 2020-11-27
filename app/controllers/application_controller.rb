@@ -13,14 +13,15 @@ class ApplicationController < ActionController::Base
   end
 
   # For session shopping cart
-  before_action :init_session
-  helper_method :cart
+  # before_action :init_session
+  # helper_method :cart
 
-  def init_session
-    session[:cart] ||= []
-  end
+  # def init_session
+  #   session[:cart] ||= []
+  #   session[:quantity] ||= []
+  # end
 
-  def cart
-    Product.find(session[:cart])
-  end
+  # def cart
+  #   Product.find(session[:cart])
+  # end
 end
