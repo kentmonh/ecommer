@@ -11,7 +11,7 @@
         </label>
       </div>
       <div class="col-auto">
-        <%= select_tag 'filter_product', raw("<option>All Products</option><option>Sale Products</option><option>New Products</option>"), :onchange => "this.form.submit();" %>
+        <%= select_tag 'filter_product', raw("<option>All Products</option><option>Sale Products</option><option>New Products</option>"), :onchange => "this.form.submit();", class: 'form-control' %>
       </div>
     </div>
   <% end %>
