@@ -14,15 +14,15 @@
         <% if @filter_keyword == "All Products" %>
           <%= select_tag 'filter_product', raw("<option selected='selected'>All Products</option>
             <option>Sale Products</option>
-            <option>New Products</option>"), :onchange => "this.form.submit();" %>
+            <option>New Products</option>"), :onchange => "this.form.submit();", class: 'form-control' %>
         <% elsif @filter_keyword == "Sale Products" %>
           <%= select_tag 'filter_product', raw("<option>All Products</option>
             <option selected='selected'>Sale Products</option>
-            <option>New Products</option>"), :onchange => "this.form.submit();" %>
+            <option>New Products</option>"), :onchange => "this.form.submit();", class: 'form-control' %>
         <% else %>
           <%= select_tag 'filter_product', raw("<option>All Products</option>
             <option>Sale Products</option>
-            <option selected='selected'>New Products</option>"), :onchange => "this.form.submit();" %>
+            <option selected='selected'>New Products</option>"), :onchange => "this.form.submit();", class: 'form-control' %>
         <% end %>
 
       </div>

@@ -42,12 +42,16 @@
         <ul class="navbar-nav">
           <% if customer_signed_in? %>
             <li class="nav-item">
-              <p class="nav-link lead"><%= link_to current_customer.email, cart_path(current_customer.id) %></p>
+              <p class="nav-link lead"><%= link_to current_customer.email, carts_path %>
+              <span class="badge badge-secondary"><%= products_hash.size() %></span></p>
             </li>
             <li class="nav-item">
               <p class="nav-link lead"><%= link_to "Sign Out", destroy_customer_session_path, :method => :delete %></p>
             </li>
           <% else %>
+            <li class="nav-item">
+              <p class="nav-link lead"><%= link_to "Cart", carts_path %></p>
+            </li>
             <li class="nav-item">
               <p class="nav-link lead"><%= link_to "Sign Up", new_customer_registration_path %></p>
             </li>
@@ -64,7 +68,7 @@
         <div class=form-group>
           <div class="row">
             <div class="col-6">
-              <%= text_field_tag(:keywords, nil, class: "input", placeholder: "Search Products", class: 'form-control') %>
+              <%= text_field_tag(:keywords, nil, class: "input form-control", placeholder: "Search Products") %>
             </div>
             <div class="col-4">
               <%= select_tag 'select_brand', options_from_collection_for_select(Brand.all, :id, :name), prompt: "All Brand", class: 'form-control' %>

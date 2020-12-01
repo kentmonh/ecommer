@@ -1,11 +1,9 @@
 class CartsController < ApplicationController
   # current_cart = current_customer.cart
 
-  def create
-    id = params[:id].to_i
+  def index
+    @products_hash = products_hash
+    @product_ids_array = @products_hash.keys
+    @cart_products = Product.find(@product_ids_array)
   end
-
-  def destroy; end
-
-  def show; end
 end

@@ -12,16 +12,29 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit :account_update, keys: added_attrs
   end
 
-  # For session shopping cart
-  # before_action :init_session
-  # helper_method :cart
+  before_action :current_cart
+  helper_method :products_hash
 
-  # def init_session
-  #   session[:cart] ||= []
-  #   session[:quantity] ||= []
-  # end
+  def current_user
+    @current_user = current_customer if customer_signed_in?
+  end
 
-  # def cart
-  #   Product.find(session[:cart])
-  # end
+  def current_cart
+    if customer_signed_in?
+      if current_customer.cart.nil?
+        @cart = Cart.create(customer_id: current_customer.id)
+        current_customer.cart = @cart
+        current_customer.save
+      else
+        @cart = current_customer.cart
+      end
+    else
+      @cart = Cart.create
+    end
+    @cart
+  end
+
+  def products_hash
+    @products_hash = current_cart.cart_products.group(:product_id).sum(:quantity)
+  end
 end

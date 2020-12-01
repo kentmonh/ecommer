@@ -1,0 +1,24 @@
+<ul class="list-group list-group-flush">
+  <% @products_hash.each do |p| %>
+    <% product = Product.find(p[0]) %>
+    <li class="list-group-item">
+      <%= product.name %>
+      <%= p[1] %>
+
+      <div>
+        <%= form_with url: cart_product_path(product), method: :delete do %>
+          <%= hidden_field_tag(:id, product.id) %>
+          <%= button_tag "Remove from Cart", class: "btn btn-outline-dark" %>
+        <% end %>
+      </div>
+
+      <div>
+        <%= form_with url: cart_product_path(product), html: { method: :put } do %>
+          <%= hidden_field_tag(:id, product.id) %>
+          <%= number_field(:quantity, :value, in: 1..20, step: 1) %>
+          <%= button_tag "Update from number", class: "btn btn-outline-dark" %>
+        <% end %>
+      </div>
+    </li>
+  <% end %>
+</ul>

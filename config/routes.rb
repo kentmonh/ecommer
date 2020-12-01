@@ -22,7 +22,10 @@ Rails.application.routes.draw do
   resources :brands, only: %i[index show]
 
   # Routes for carts
-  resources :carts, only: %i[show create destroy]
+  resources :carts, only: %i[index]
+
+  # Routes for cart_products
+  resources :cart_products, only: %i[create destroy update]
 
   # Homepage
   root to: "products#index"
@@ -37,6 +40,3 @@ Rails.application.routes.draw do
   # Routes for Pages
   get ":permalink", to: "pages#permalink", as: :permalink
 end
-
-# Session Shopping Cart
-# resources :cart, only: %i[create destroy index]
