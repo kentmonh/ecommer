@@ -29,7 +29,8 @@ class ApplicationController < ActionController::Base
         @cart = current_customer.cart
       end
     else
-      @cart = Cart.create
+      session[:cart] = Cart.new
+      @cart = session[:cart]
     end
     @cart
   end
