@@ -5,9 +5,9 @@
       <p class="lead">
         Email: <%= @user.email %>
       </p>
-      <%= text_field_tag(:full_name, "Full name: " + @user.full_name, class: "input form-control mb-3") %>
-      <%= text_field_tag(:phone, "Mobile Phone: " + @user.phone, class: "input form-control mb-3") %>
-      <%= text_field_tag(:address, "Address: " + @user.address, class: "input form-control mb-3") %>
+      <%= text_field_tag(:full_name, @user.full_name, class: "input form-control mb-3") %>
+      <%= text_field_tag(:phone, @user.phone, class: "input form-control mb-3") %>
+      <%= text_field_tag(:address, @user.address, class: "input form-control mb-3") %>
       <%= select_tag 'select_province', options_from_collection_for_select(Province.all, :id, :name, @user.province_id), class: 'form-control mb-3' %>
       <%= submit_tag("Change Information", class: "btn btn-outline-dark form-control") %>
     <% end %>
