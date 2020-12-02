@@ -1,0 +1,57 @@
+<div class="row">
+  <div class="col-md-8">
+
+    <%= form_with(url: checkout_path(@user), method: "put") do %>
+      <p class="lead">
+        Email: <%= @user.email %>
+      </p>
+      <%= text_field_tag(:full_name, "Full name: " + @user.full_name, class: "input form-control mb-3") %>
+      <%= text_field_tag(:phone, "Mobile Phone: " + @user.phone, class: "input form-control mb-3") %>
+      <%= text_field_tag(:address, "Address: " + @user.address, class: "input form-control mb-3") %>
+      <%= select_tag 'select_province', options_from_collection_for_select(Province.all, :id, :name, @user.province_id), class: 'form-control mb-3' %>
+      <%= submit_tag("Change Information", class: "btn btn-outline-dark form-control") %>
+    <% end %>
+  </div>
+
+  <div class="col-md-4">
+
+    <p class="lead">
+      Sub Total: <%= @sub_total %>
+    </p>
+
+    <% if @province.pst.present? %>
+      <p class="lead">
+        PST: <%= (@province.pst * @sub_total / 100).round(2) %>
+      </p>
+    <% else %>
+      <p class="lead">
+        PST: 0
+      </p>
+    <% end %>
+
+    <% if @province.gst.present? %>
+      <p class="lead">
+        GST: <%= (@province.gst * @sub_total / 100).round(2) %>
+      </p>
+    <% else %>
+      <p class="lead">
+        GST: 0
+      </p>
+    <% end %>
+
+    <% if @province.hst.present? %>
+      <p class="lead">
+        HST: <%= (@province.hst * @sub_total / 100).round(2) %>
+      </p>
+    <% else %>
+      <p class="lead">
+        HST: 0
+      </p>
+    <% end %>
+
+    <p class="lead">
+      Total: <%= @total %>
+    </p>
+
+  </div>
+</div>

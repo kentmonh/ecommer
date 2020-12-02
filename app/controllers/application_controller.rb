@@ -12,8 +12,8 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit :account_update, keys: added_attrs
   end
 
-  before_action :current_cart
-  helper_method :products_hash
+  before_action :current_user, :current_cart
+  helper_method :products_hash, :sub_total, :total
 
   def current_user
     @current_user = current_customer if customer_signed_in?
@@ -37,5 +37,25 @@ class ApplicationController < ActionController::Base
 
   def products_hash
     @products_hash = current_cart.cart_products.group(:product_id).sum(:quantity)
+  end
+
+  def sub_total
+    @sub_total = 0
+    products_hash.each do |p|
+      product = Product.find(p[0])
+      @sub_total += product.sale_price * p[1]
+    end
+    @sub_total.round(2)
+  end
+
+  def total
+    @user = current_user
+    @tax = 0
+    @province = Province.find(@user.province_id)
+    @tax += @province.pst if @province.pst.present?
+    @tax += @province.gst if @province.gst.present?
+    @tax += @province.hst if @province.hst.present?
+    @total = (@tax / 100 + 1) * sub_total
+    @total.round(2)
   end
 end

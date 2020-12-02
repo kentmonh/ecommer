@@ -27,6 +27,9 @@ Rails.application.routes.draw do
   # Routes for cart_products
   resources :cart_products, only: %i[create destroy update]
 
+  # Routes for checkout
+  resources :checkout, only: %i[index update]
+
   # Homepage
   root to: "products#index"
 

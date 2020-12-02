@@ -9,58 +9,55 @@
 <% end %>
 
 <% if @products_hash.present? %>
-  <% total = 0 %>
   <% @products_hash.each do |p| %>
     <% product = Product.find(p[0]) %>
     <div class="card m-2">
       <div class="card-body">
         <div class="row">
-            <div class="col-md-3">
-              <% if product.image.present? %>
-                <%= image_tag product.image, class: "card-img" %>
+          <div class="col-md-3">
+            <% if product.image.present? %>
+              <%= image_tag product.image, class: "card-img" %>
+            <% end %>
+          </div>
+
+          <div class="col-md-7 offset-2">
+
+            <p class="lead">
+              <%= product.name %>
+            </p>
+
+            <p>
+              Price: <%= product.sale_price %>
+            </p>
+
+            <p>
+              Quantity: <%= p[1] %>
+            </p>
+
+            <div>
+              <%= form_with url: cart_product_path(product), method: :put do %>
+                <%= hidden_field_tag(:id, product.id) %>
+                <div class="row">
+                  <div class="col-md-6">
+                    <%= number_field(:quantity, :value, in: 1..20, step: 1, class: 'form-control') %>
+                  </div>
+                  <div class="col-md-6">
+                    <%= button_tag "Change the quantity of product", class: "btn btn-outline-dark" %>
+                  </div>
+                </div>
               <% end %>
             </div>
 
-            <div class="col-md-7 offset-2">
-
-              <p class="lead">
-                <%= product.name %>
-              </p>
-
-              <p>
-                Price: <%= product.sale_price %>
-              </p>
-
-              <p>
-                Quantity: <%= p[1] %>
-              </p>
-
-              <div>
-                <%= form_with url: cart_product_path(product), method: :put do %>
-                  <%= hidden_field_tag(:id, product.id) %>
-                  <div class="row">
-                    <div class="col-md-6">
-                    <%= number_field(:quantity, :value, in: 1..20, step: 1, class: 'form-control') %>
-                    </div>
-                    <div class="col-md-6">
-                    <%= button_tag "Change the quantity of product", class: "btn btn-outline-dark" %>
-                    </div>
-                  </div>
-                <% end %>
-              </div>
-
-              <div>
-                <%= form_with url: cart_product_path(product), method: :delete do %>
-                  <%= hidden_field_tag(:id, product.id) %>
-                  <%= button_tag "Remove from Cart", class: "btn mt-3 btn-outline-dark" %>
-                <% end %>
-              </div>
-
+            <div>
+              <%= form_with url: cart_product_path(product), method: :delete do %>
+                <%= hidden_field_tag(:id, product.id) %>
+                <%= button_tag "Remove from Cart", class: "btn mt-3 btn-outline-dark" %>
+              <% end %>
             </div>
+          </div>
         </div>
       </div>
     </div>
-  <% total += product.sale_price * p[1] %>
 <% end %>
 
   <!-- total amount section -->
@@ -69,8 +66,13 @@
       <div class="row">
         <div class="col-md-7 offset-5">
           <p class="lead">
-            Total: <%= total.round(2) %>
+            Sub Total: <%= @sub_total %>
           </p>
+
+          <div>
+            <%= button_to "Checkout", checkout_index_path,
+              :class => "btn mt-3 btn-outline-dark", :method => :get %>
+          </div>
         </div>
       </div>
     </div>
