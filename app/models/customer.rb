@@ -5,7 +5,8 @@ class Customer < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   belongs_to :province
+  has_many :orders
   has_one :cart
 
-  validates :full_name, :address, presence: true
+  validates :full_name, presence: true
 end

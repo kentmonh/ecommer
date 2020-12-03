@@ -30,15 +30,18 @@ Rails.application.routes.draw do
   # Routes for checkout
   resources :checkout, only: %i[index update]
 
+  # Routes for orders
+  resources :orders, only: %i[index show]
+
+  # Routes for order_products
+  resources :order_product, only: %i[create]
+
   # Homepage
   root to: "products#index"
 
   # Active Admin
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-
-  # Routes for orders
-  resources :orders, only: %i[show]
 
   # Routes for Pages
   get ":permalink", to: "pages#permalink", as: :permalink

@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  total: 1.5
+  address: MyText
+  province_id: 1
+  customer: one
+  order_status: one
+
+two:
+  total: 1.5
+  address: MyText
+  province_id: 1
+  customer: two
+  order_status: two
