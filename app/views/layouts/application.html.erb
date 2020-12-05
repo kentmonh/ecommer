@@ -42,7 +42,10 @@
         <ul class="navbar-nav">
           <% if customer_signed_in? %>
             <li class="nav-item">
-              <p class="nav-link lead"><%= link_to current_customer.email, carts_path %>
+              <p class="nav-link lead"><%= link_to current_customer.email, orders_path %></p>
+            </li>
+            <li class="nav-item">
+              <p class="nav-link lead"><%= link_to "Cart", carts_path %>
               <span class="badge badge-secondary"><%= products_hash.size() %></span></p>
             </li>
             <li class="nav-item">

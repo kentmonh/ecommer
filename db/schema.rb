@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_27_191941) do
+ActiveRecord::Schema.define(version: 2020_12_05_002501) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -71,7 +71,10 @@ ActiveRecord::Schema.define(version: 2020_11_27_191941) do
     t.integer "cart_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "order_id"
+    t.float "price"
     t.index ["cart_id"], name: "index_cart_products_on_cart_id"
+    t.index ["order_id"], name: "index_cart_products_on_order_id"
     t.index ["product_id"], name: "index_cart_products_on_product_id"
   end
 
@@ -105,8 +108,20 @@ ActiveRecord::Schema.define(version: 2020_11_27_191941) do
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
   end
 
+  create_table "order_items", force: :cascade do |t|
+    t.float "unit_price"
+    t.integer "quantity"
+    t.float "total_price"
+    t.integer "product_id", null: false
+    t.integer "order_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["product_id"], name: "index_order_items_on_product_id"
+  end
+
   create_table "order_products", force: :cascade do |t|
-    t.float "order_price"
+    t.float "price"
     t.integer "quantity"
     t.integer "order_id", null: false
     t.integer "product_id", null: false
@@ -123,14 +138,19 @@ ActiveRecord::Schema.define(version: 2020_11_27_191941) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.float "pst"
-    t.float "gst"
-    t.float "hst"
-    t.float "amount"
-    t.text "shipping_address"
+    t.float "total"
+    t.text "address"
+    t.integer "province_id"
+    t.integer "customer_id", null: false
     t.integer "order_status_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "product_ids"
+    t.integer "quantities"
+    t.float "prices"
+    t.float "sub_total"
+    t.float "tax"
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["order_status_id"], name: "index_orders_on_order_status_id"
   end
 
@@ -177,8 +197,11 @@ ActiveRecord::Schema.define(version: 2020_11_27_191941) do
   add_foreign_key "cart_products", "carts"
   add_foreign_key "cart_products", "products"
   add_foreign_key "carts", "customers"
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "order_items", "products"
   add_foreign_key "order_products", "orders"
   add_foreign_key "order_products", "products"
+  add_foreign_key "orders", "customers"
   add_foreign_key "orders", "order_statuses"
   add_foreign_key "product_categories", "categories"
   add_foreign_key "product_categories", "products"

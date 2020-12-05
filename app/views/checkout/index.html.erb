@@ -53,5 +53,10 @@
       Total: <%= @total %>
     </p>
 
+    <div>
+      <%= button_to "Create Order", orders_path,
+        :class => "btn mt-3 btn-outline-dark", :method => :post %>
+    </div>
+
   </div>
 </div>

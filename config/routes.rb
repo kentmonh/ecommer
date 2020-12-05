@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   resources :checkout, only: %i[index update]
 
   # Routes for orders
-  resources :orders, only: %i[index show]
+  resources :orders, only: %i[index show create]
 
   # Routes for order_products
   resources :order_product, only: %i[create]

@@ -8,7 +8,6 @@ class Product < ApplicationRecord
   has_one_attached :image
 
   has_many :cart_products, dependent: :destroy
-  has_many :order_products, dependent: :destroy
 
   validates :sku, :name, :price, :sale_price, presence: true
   validates :sku, :name, uniqueness: true

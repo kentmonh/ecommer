@@ -8,10 +8,10 @@ class CartProductsController < ApplicationController
       @cart_product = @cart.cart_products.new(quantity: 1, product_id: id)
     else
       @cart_product.quantity = @cart_product.quantity + 1
-      @cart_product.save
     end
-    logger.debug("TEST #{@cart_product}")
+    @cart_product.save
     @cart.save
+    logger.debug("TEST #{@cart_product}")
     flash[:add_cart] = "#{product.name} added to the Cart."
     redirect_to root_path
   end

@@ -4,8 +4,8 @@ class CreateOrders < ActiveRecord::Migration[6.0]
       t.float :total
       t.text :address
       t.integer :province_id
-      t.references :customer, null: false, foreign_key: true
-      t.references :order_status, null: false, foreign_key: true
+      t.references :customer, foreign_key: true
+      t.references :order_status, foreign_key: true
 
       t.timestamps
     end
