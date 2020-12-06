@@ -1,1 +1,11 @@
-<p><%= @order.total %></p>
+<% @order_products.each do |op| %>
+  <li class="list-group-item">
+    <p><%= Product.find(op.product_id).name %></p>
+    <p>Quantity: <%= op.quantity %></p>
+    <p>Sale Price: <%= op.price %></p>
+  </li>
+<% end %>
+
+<p>Sub Total: <%= @order.sub_total %></p>
+<p>Tax: <%= @order.tax %></p>
+<p>Total: <%= @order.total %></p>

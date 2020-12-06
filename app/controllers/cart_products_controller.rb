@@ -5,7 +5,7 @@ class CartProductsController < ApplicationController
     @cart = current_cart
     @cart_product = @cart.cart_products.find { |cp| cp.product_id == id }
     if @cart_product.nil?
-      @cart_product = @cart.cart_products.new(quantity: 1, product_id: id)
+      @cart_product = @cart.cart_products.new(quantity: 1, price: product.sale_price, product_id: id)
     else
       @cart_product.quantity = @cart_product.quantity + 1
     end

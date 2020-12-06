@@ -1,18 +1,26 @@
 ActiveAdmin.register Customer do
+  permit_params :email, :encrypted_password, :reset_password_token, :reset_password_sent_at, :remember_created_at, :full_name, :address, :phone, :province_id,
+                orders: [:id]
 
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  # Uncomment all parameters which should be permitted for assignment
-  #
-  # permit_params :email, :encrypted_password, :reset_password_token, :reset_password_sent_at, :remember_created_at, :full_name, :address, :phone, :province_id
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:email, :encrypted_password, :reset_password_token, :reset_password_sent_at, :remember_created_at, :full_name, :address, :phone, :province_id]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
-  
+  show do |customer|
+    attributes_table do
+      row :email
+      row :full_name
+      row :address
+      row :phone
+      row :province
+      row :orders
+    end
+  end
+
+  index do
+    selectable_column
+    column :email
+    column :full_name
+    column :address
+    column :phone
+    column :province
+    column :orders
+    actions
+  end
 end

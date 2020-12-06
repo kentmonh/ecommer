@@ -48,14 +48,18 @@ class ApplicationController < ActionController::Base
     @sub_total.round(2)
   end
 
-  def total
+  def tax
     @user = current_user
     @tax = 0
     @province = Province.find(@user.province_id)
     @tax += @province.pst if @province.pst.present?
     @tax += @province.gst if @province.gst.present?
     @tax += @province.hst if @province.hst.present?
-    @total = (@tax / 100 + 1) * sub_total
-    @total.round(2)
+    @tax = @tax / 100 * sub_total
+    @tax.round(2)
+  end
+
+  def total
+    (sub_total + tax).round(2)
   end
 end
