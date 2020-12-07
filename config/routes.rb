@@ -39,7 +39,7 @@ Rails.application.routes.draw do
   # Routes for payment
   scope "/payment" do
     post "create", to: "payment#create", as: "payment_create"
-    get "success", to: "paymentt#success", as: "payment_success"
+    get "success", to: "payment#success", as: "payment_success"
     get "cancel", to: "payment#cancel", as: "payment_cancel"
   end
 

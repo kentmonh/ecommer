@@ -6,6 +6,19 @@
   </li>
 <% end %>
 
-<p>Sub Total: <%= @order.sub_total %></p>
-<p>Tax: <%= @order.tax %></p>
-<p>Total: <%= @order.total %></p>
+<div class="col d-flex justify-content-center">
+  <p>Sub Total: <%= @order.sub_total %></p>
+</div>
+<div class="col d-flex justify-content-center">
+  <p>Tax: <%= @order.tax %></p>
+</div>
+<div class="col d-flex justify-content-center">
+  <p>Total: <%= @order.total %></p>
+</div>
+
+<div class="col d-flex justify-content-center">
+  <%= form_with url: payment_create_path, method: :post do %>
+    <%= hidden_field_tag(:id, @order.id, autocomplete: "off") %>
+    <%= button_tag "Buy Now", class: "btn btn-outline-dark" %>
+  <% end %>
+</div>
