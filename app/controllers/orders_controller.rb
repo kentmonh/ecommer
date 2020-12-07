@@ -5,8 +5,6 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    # @cart = Cart.where("customer_id = ?", current_user.id)
-    # @cart_products = CartProduct.where("cart_id = ?", @cart.ids)
     @order_products = OrderProduct.where("order_id = ?", params[:id])
   end
 
@@ -17,6 +15,7 @@ class OrdersController < ApplicationController
       sub_total:       sub_total,
       total:           total,
       tax:             tax,
+      is_paid:         false,
       address:         @customer.address,
       province_id:     @customer.province_id,
       customer_id:     @customer.id,

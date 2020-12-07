@@ -16,9 +16,14 @@
   <p>Total: <%= @order.total %></p>
 </div>
 
-<div class="col d-flex justify-content-center">
-  <%= form_with url: payment_create_path, method: :post do %>
-    <%= hidden_field_tag(:id, @order.id, autocomplete: "off") %>
-    <%= button_tag "Buy Now", class: "btn btn-outline-dark" %>
-  <% end %>
-</div>
+<% if @order.is_paid == true %>
+  <p>This order already paid.</p>
+  <p><%= @order.payment_id %></p>
+<% else %>
+  <div class="col d-flex justify-content-center">
+    <%= form_with url: payment_create_path, method: :post do %>
+      <%= hidden_field_tag(:id, @order.id, autocomplete: "off") %>
+      <%= button_tag "Buy Now", class: "btn btn-outline-dark" %>
+    <% end %>
+  </div>
+<% end %>
