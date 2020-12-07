@@ -41,6 +41,10 @@ gem 'bootstrap', '~> 5.0.0.alpha1'
 # Gem for payment
 gem 'stripe'
 
+# Gem for robocop
+gem 'rubocop'
+gem 'rubocop-rails'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
