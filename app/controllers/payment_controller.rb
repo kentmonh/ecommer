@@ -49,5 +49,12 @@ class PaymentController < ApplicationController
     logger.debug("TEST success #{order.payment_id}")
   end
 
-  def cancel; end
+  def cancel
+    id = session[:order_id].to_i
+    order = Order.find(id)
+    order.is_paid = false
+    order.order_status_id = 1
+    order.payment_id = nil
+    order.save
+  end
 end

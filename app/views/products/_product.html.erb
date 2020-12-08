@@ -11,7 +11,7 @@
 
       <div class="col d-flex justify-content-center">
         <%= form_with url: cart_products_path, method: :post do %>
-          <%= hidden_field_tag(:id, product.id, autocomplete:"off") %>
+          <%= hidden_field_tag(:id, product.id, autocomplete:"off", id: "id#{product.id}") %>
           <%= button_tag "Add to Cart", class: "btn btn-outline-dark" %>
         <% end %>
       </div>
