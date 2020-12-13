@@ -3,6 +3,8 @@ class CreateProvinces < ActiveRecord::Migration[6.0]
     create_table :provinces do |t|
       t.string :name
       t.float :pst
+      t.float :gst
+      t.float :hst
 
       t.timestamps
     end
