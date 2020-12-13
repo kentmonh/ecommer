@@ -1,0 +1,14 @@
+{
+    "editor.tabSize": 2,
+    "files.autoSave": "onFocusChange",
+    "files.trimTrailingWhitespace": true,
+    "ruby.intellisense": false, // Let Solargraph handle intellisense.
+    "ruby.format": "rubocop", // Set the auto-formatter for Ruby code to Rubocop.
+    "ruby.lint": { "rubocop": true }, // Use Rubocop as the default linter too.
+    "[ruby]": {
+        "editor.formatOnSave": true, // Trigger auto-formatting for Ruby code.
+    },
+    "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\wsl.exe", // PC Users Only
+    "emmet.showSuggestionsAsSnippets": true,
+    "emmet.includeLanguages": {"html.erb": "html", "erb": "html"},
+}
