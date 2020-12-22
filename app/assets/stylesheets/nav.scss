@@ -1,0 +1,17 @@
+@import "./variables";
+
+/* Link */
+a {
+  font-family: "Crimson Text Regular";
+  font-size: 1.1em;
+  color: $bright-red;
+}
+
+a:hover {
+  color: $deep-red;
+  text-decoration: underline;
+}
+
+ul {
+  list-style-type: none;
+}

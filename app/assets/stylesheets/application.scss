@@ -1,0 +1,28 @@
+@import "./variables";
+
+/* Format page */
+body {
+  background-color: $cloud;
+	width: 100%;
+  margin: auto;
+  padding: 3% 10% 3% 10%;
+}
+
+@font-face {
+  font-family: "Source Sans Pro Regular";
+  src: url('SourceSansPro-Regular.ttf') format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Crimson Text Regular";
+  src: url('CrimsonText-Regular.ttf') format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Pagination */
+.pagination a {
+  color: #000;
+}
